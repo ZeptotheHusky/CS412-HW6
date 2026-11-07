@@ -202,7 +202,7 @@ function loadVideoTexture(url) {
 
 const brickTexture = loadTexture("brick.png");
 const normalTexture = loadTexture("texture2.jpg");
-const { texture: videoTexture, video: videoEl } = loadVideoTexture('your-video.mp4');
+const { texture: videoTexture, video: videoEl } = loadVideoTexture('videoplayback.mp4');
 
 const BUMP_MAPPING = 0, NORMAL_MAPPING = 1;
 const objects = [
