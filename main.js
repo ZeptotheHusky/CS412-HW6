@@ -179,6 +179,7 @@ function loadVideoTexture(url) {
   video.muted = true;
   video.src = url;
   video.addEventListener('canplay', () => video.play());
+  video.addEventListener('playing', () => console.log('video is playing!'));
 
   return { texture, video };
 }
