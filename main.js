@@ -196,6 +196,8 @@ function loadVideoTexture(url) {
   video.loop = true;
   video.muted = true;
   video.play();
+  video.playsInline = true;
+  video.crossOrigin = 'anonymous';
 
   return { texture, video };
 }
@@ -211,6 +213,8 @@ const objects = [
   { mesh: sphereMesh, texture: videoTexture, mapping: BUMP_MAPPING, offset: [0, 0, 0] },
   { mesh: torusMesh, texture: brickTexture, mapping: BUMP_MAPPING, offset: [0, 2, 0] }
 ];
+
+canvas.addEventListener('click', () => videoEl.play(), { once: true });
 
 gl.enable(gl.DEPTH_TEST);
 gl.clearColor(0, 0, 0, 1);
