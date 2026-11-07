@@ -276,7 +276,8 @@ function render(time) {
 
   if (videoEl.readyState >= videoEl.HAVE_CURRENT_DATA) {
     gl.bindTexture(gl.TEXTURE_2D, videoTexture);
-    gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, gl.RGBA, gl.UNSIGNED_BYTE, videoEl);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, videoEl);
   }
 
   gl.activeTexture(gl.TEXTURE0);
