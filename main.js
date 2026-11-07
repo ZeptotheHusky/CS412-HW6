@@ -208,7 +208,7 @@ const BUMP_MAPPING = 0, NORMAL_MAPPING = 1;
 const objects = [
   { mesh: cubeMesh, texture: brickTexture, mapping: BUMP_MAPPING, offset: [-1.8, 0, 0] },
   { mesh: cylinderMesh, texture: normalTexture, mapping: NORMAL_MAPPING, offset: [1.8, 0, 0] },
-  { mesh: sphereMesh, texture: videoTexture, mapping: BUMP_MAPPING, offset: [0, 0, 0] },
+  { mesh: sphereMesh, texture: videoTexture, mapping: NORMAL_MAPPING, offset: [0, 0, 0] },
   { mesh: torusMesh, texture: brickTexture, mapping: BUMP_MAPPING, offset: [0, 2, 0] }
 ];
 
