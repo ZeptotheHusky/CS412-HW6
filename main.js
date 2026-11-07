@@ -196,7 +196,6 @@ function loadVideoTexture(url) {
   video.muted = true;
   video.src = url;
   video.addEventListener('canplay', () => video.play());
-  video.addEventListener('playing', () => console.log('video is playing!'));  // add this
 
   return { texture, video };
 }
@@ -274,6 +273,13 @@ function render(time) {
   const rotation = multiply(multiply(rotateY(dragRotY), rotateX(dragRotX)), axisRotation);
 
   if (videoEl.readyState >= videoEl.HAVE_CURRENT_DATA) {
+    gl.bindTexture(gl.TEXTURE_2D, videoTexture);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, videoEl);
+  }
+
+  if (videoEl.readyState >= videoEl.HAVE_CURRENT_DATA) {
+    console.log('updating video texture');  // add this
     gl.bindTexture(gl.TEXTURE_2D, videoTexture);
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, videoEl);
