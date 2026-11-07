@@ -93,7 +93,7 @@ function createSphere(latBands = 32, lonBands = 32) {
       const y = cosPhi;
       const z = sinPhi * sinTheta;
 
-      positions.push(x, y, z);
+      positions.push(x*2, y*2, z*2);
       normals.push(x, y, z);
       tangents.push(-sinTheta, 0, cosTheta);
       texCoords.push(lon / lonBands, 1 - lat / latBands);
