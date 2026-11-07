@@ -168,6 +168,23 @@ const cylinderMesh = createMesh(createCylinder());
 const sphereMesh = createMesh(createSphere());
 const torusMesh = createMesh(createTorus());
 
+function loadTexture(url) {
+  const texture = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([128, 128, 255, 255]));
+
+  const image = new Image();
+  image.onload = () => {
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);  // images start at the top row, texture coordinates at the bottom
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+    gl.generateMipmap(gl.TEXTURE_2D);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+  };
+  image.src = url;
+  return texture;
+}
+
 function loadVideoTexture(url) {
   const texture = gl.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -180,23 +197,6 @@ function loadVideoTexture(url) {
   video.src = url;
   video.addEventListener('canplay', () => video.play());
   video.addEventListener('playing', () => console.log('video is playing!'));
-
-  return { texture, video };
-}
-
-function loadVideoTexture(url) {
-  const texture = gl.createTexture();
-  gl.bindTexture(gl.TEXTURE_2D, texture);
-  // Placeholder pixel while video loads
-  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 255]));
-
-  const video = document.createElement('video');
-  video.playsInline = true;
-  video.crossOrigin = 'anonymous';
-  video.src = url;
-  video.loop = true;
-  video.muted = true;
-  video.addEventListener('canplay', () => video.play());
 
   return { texture, video };
 }
