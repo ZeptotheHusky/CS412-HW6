@@ -272,20 +272,14 @@ function render(time) {
   const axisRotation = ROTATE[axisSelect.value](sliderAngle * Math.PI / 180 + spinAngle);
   const rotation = multiply(multiply(rotateY(dragRotY), rotateX(dragRotX)), axisRotation);
 
-  if (videoEl.readyState >= videoEl.HAVE_CURRENT_DATA) {
-    gl.bindTexture(gl.TEXTURE_2D, videoTexture);
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, videoEl);
-  }
-
-  if (videoEl.readyState >= videoEl.HAVE_CURRENT_DATA) {
-    console.log('updating video texture');  // add this
-    gl.bindTexture(gl.TEXTURE_2D, videoTexture);
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, videoEl);
-  }
-
   gl.activeTexture(gl.TEXTURE0);
+
+  if (videoEl.readyState >= videoEl.HAVE_CURRENT_DATA) {
+      gl.bindTexture(gl.TEXTURE_2D, videoTexture);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, videoEl);
+    }
+
   for (const { mesh, texture, mapping, offset } of objects) {
     gl.uniformMatrix4fv(uModelView, false, multiply(view, multiply(translate(...offset), rotation)));
     gl.uniform1i(uMapping, mapping);
