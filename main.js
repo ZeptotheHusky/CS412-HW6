@@ -163,7 +163,7 @@ function createMesh({ positions, normals, tangents, texCoords, indices }) {
   return { vao, count: indices.length };
 }
 
-const coneMesh = createMesh(createCube());
+const coneMesh = createMesh(createCone());
 const cylinderMesh = createMesh(createCylinder());
 const sphereMesh = createMesh(createSphere());
 const torusMesh = createMesh(createTorus());
