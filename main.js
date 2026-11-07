@@ -192,12 +192,12 @@ function loadVideoTexture(url) {
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 255]));
 
   const video = document.createElement('video');
+  video.playsInline = true;
+  video.crossOrigin = 'anonymous';
   video.src = url;
   video.loop = true;
   video.muted = true;
   video.play();
-  video.playsInline = true;
-  video.crossOrigin = 'anonymous';
 
   return { texture, video };
 }
