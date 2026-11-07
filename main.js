@@ -197,7 +197,7 @@ function loadVideoTexture(url) {
   video.src = url;
   video.loop = true;
   video.muted = true;
-  video.play();
+  video.addEventListener('canplay', () => video.play());
 
   return { texture, video };
 }
