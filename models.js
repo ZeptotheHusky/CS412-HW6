@@ -106,7 +106,7 @@ function createSphere(latBands = 32, lonBands = 32) {
       const b = a + 1;
       const c = a + (lonBands + 1);
       const d = c + 1;
-      indices.push(a, c, b,  b, c, d);
+      indices.push(a, b, c,  b, d, c);
     }
   }
 
